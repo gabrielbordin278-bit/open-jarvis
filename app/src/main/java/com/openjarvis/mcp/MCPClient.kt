@@ -1,3 +1,5 @@
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 package com.openjarvis.mcp
 
 import com.openjarvis.llm.HttpClient
@@ -37,9 +39,9 @@ class MCPClient(
             
             val request = Request.Builder()
                 .url(server.url)
-                .post(okhttp3.RequestBody.create(
-                    "application/json".toByteArray().to okhttp3.MediaType.get("application/json"),
-                    requestBody
+                .post(
+    requestBody.toRequestBody("application/json".toMediaType())
+)
                 ))
                 .build()
             
@@ -79,9 +81,9 @@ class MCPClient(
             
             val request = Request.Builder()
                 .url(server.url)
-                .post(okhttp3.RequestBody.create(
-                    "application/json".toByteArray().to okhttp3.MediaType.get("application/json"),
-                    requestBody
+                .post(
+    requestBody.toRequestBody("application/json".toMediaType())
+)
                 ))
                 .build()
             
@@ -127,9 +129,9 @@ class MCPClient(
             
             val request = Request.Builder()
                 .url(server.url)
-                .post(okhttp3.RequestBody.create(
-                    "application/json".toByteArray().to okhttp3.MediaType.get("application/json"),
-                    requestBody
+                .post(
+    requestBody.toRequestBody("application/json".toMediaType())
+)
                 ))
                 .build()
             
