@@ -1,1 +1,42 @@
+name: Build Open Jarvis APK
 
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Preparar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Preparar Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Instalar Android 34
+        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Preparar Gradle 8.2
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.2'
+
+      - name: Compilar APK
+        run: gradle --no-daemon assembleDebug
+
+      - name: Disponibilizar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Open-Jarvis-APK
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
