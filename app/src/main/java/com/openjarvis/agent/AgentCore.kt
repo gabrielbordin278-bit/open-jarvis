@@ -190,6 +190,7 @@ fun executeTask(cleanCommand: String) {
                 _state.value = AgentState.Error(e.message ?: "Unknown error")
                 graphifyRepo.logTask(cleanCommand, "failed: ${e.message}", "", 0)
             }
+            }
         }
     }
 
